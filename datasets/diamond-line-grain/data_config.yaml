@@ -1,0 +1,6 @@
+#colors:
+#- [70, 96, 175]
+names: [grain]
+nc: 1
+train: ../diamond-line-grain/images/train
+val: ../diamond-line-grain/images/val

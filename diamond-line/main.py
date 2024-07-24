@@ -11,7 +11,7 @@ from func import *
 from tqdm import tqdm
 
 start_time = time.time()
-border = 50
+border = 49
 map4len = 0.8625
 
 sta, end = 0, 0
@@ -42,7 +42,7 @@ def scan(image, x):
     return ret
 
 
-img_path = '/Users/xin/Desktop/HIT/240719/线9/20240719191256078.bmp'
+img_path = '/Users/xin/Desktop/HIT/240719/线5/20240719184809682.bmp'
 
 if len(sys.argv) > 1:
     img_path = sys.argv[1]
@@ -61,7 +61,7 @@ print(f'图像水平矫正完毕')
 
 img_height, img_width = img.shape
 
-scanner_list = [i for i in range(1, img_width - 2)]
+scanner_list = [i for i in range(1, img_width - 2, 2)]
 
 scanner_list = sorted(list(set(scanner_list)))
 
@@ -80,8 +80,8 @@ lengths = np.array(lengths)
 lengths = sorted(lengths)
 
 checker_length = 10
-checker_radius_front = 0.001
-checker_radius_back = 0.006
+checker_radius_front = 0.018
+checker_radius_back = 0.014
 
 length_min = 0
 length_max = 0

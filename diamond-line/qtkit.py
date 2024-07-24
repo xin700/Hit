@@ -1,4 +1,5 @@
 import sys
+import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QVBoxLayout, QWidget, QFileDialog, QTextEdit
 from PyQt5.QtCore import Qt, QProcess
 from PyQt5.QtGui import QPixmap
@@ -39,6 +40,10 @@ class MainWindow(QMainWindow):
         self.file_path = None
         self.process = None
 
+        # 获取当前脚本的目录，并生成 main.py 的路径
+        self.script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.python_file = os.path.join(self.script_dir, "main.py")
+
     def select_file(self):
         options = QFileDialog.Options()
         file_dialog = QFileDialog()
@@ -53,13 +58,10 @@ class MainWindow(QMainWindow):
 
     def execute_python_file(self):
         if self.file_path:
-            # 在这里添加要执行的 Python 文件路径
-            python_file = "main.py"
-
             # 初始化 QProcess
             self.process = QProcess(self)
             self.process.setProgram("python3")
-            self.process.setArguments([python_file, self.file_path])
+            self.process.setArguments([self.python_file, self.file_path])
 
             # 连接信号到槽
             self.process.readyReadStandardOutput.connect(self.handle_stdout)
