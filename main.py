@@ -95,6 +95,7 @@ for i in range(1,len(lengths) - checker_length - 1):
         print(f'线锯丝径：{length_min}')
         break
 
+
 for i in range(len(lengths) - 1,1 + checker_length,-1):
     if lengths[i] - lengths[i - checker_length] < checker_radius_back * checker_length:
         length_max = round(lengths[i], 4)
