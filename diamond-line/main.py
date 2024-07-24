@@ -100,14 +100,5 @@ for i in range(len(lengths) - 1, 1 + checker_length, -1):
 
 print(f'出刃高度：{round((length_min + length_max) / 2 - length_min, 4)}')
 
-# print(lengths)
-# print(f'min_length:{min_length},max_length:{max_length},aver_length:{aver_length}')
-# cv2.imshow('image', img_clone)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
-
-# print(f'丝径：{round(min_length, 4)}')
-
-
 end_time = time.time()
 print(f'用时：{round(end_time - start_time, 2)}s')

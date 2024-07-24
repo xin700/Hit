@@ -1,0 +1,4 @@
+./datasets/**/*
+./models/**/*
+
+!./datasets/make_dataset.py
