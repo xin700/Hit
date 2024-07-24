@@ -42,7 +42,7 @@ def scan(image, x):
     return ret
 
 
-img_path = '/Users/xin/Desktop/HIT/240719/线5/20240719184809682.bmp'
+img_path = '/Users/xin/Desktop/HIT/240719/线1/20240719180030150.bmp'
 
 if len(sys.argv) > 1:
     img_path = sys.argv[1]
@@ -81,7 +81,7 @@ lengths = sorted(lengths)
 
 checker_length = 10
 checker_radius_front = 0.018
-checker_radius_back = 0.014
+checker_radius_back = 0.01
 
 length_min = 0
 length_max = 0
