@@ -7,9 +7,6 @@
 """
 import sys
 import time
-import cv2
-import random
-import numpy as np
 from func import *
 from tqdm import tqdm
 
@@ -71,7 +68,7 @@ scanner_list = sorted(list(set(scanner_list)))
 print(f'正在扫描图像...')
 
 lengths = []
-for x in tqdm(scanner_list,desc='扫描进度'):
+for x in tqdm(scanner_list, desc='扫描进度'):
     values = scan(img, x)
     lengths.append(get_length(values))
     # print(sta, end)
@@ -84,19 +81,18 @@ lengths = sorted(lengths)
 
 checker_length = 10
 checker_radius_front = 0.001
-checker_radius_back  = 0.006
+checker_radius_back = 0.006
 
 length_min = 0
 length_max = 0
 
-for i in range(1,len(lengths) - checker_length - 1):
+for i in range(1, len(lengths) - checker_length - 1):
     if lengths[i + checker_length] - lengths[i] < checker_radius_front * checker_length:
         length_min = round(lengths[i], 4)
         print(f'线锯丝径：{length_min}')
         break
 
-
-for i in range(len(lengths) - 1,1 + checker_length,-1):
+for i in range(len(lengths) - 1, 1 + checker_length, -1):
     if lengths[i] - lengths[i - checker_length] < checker_radius_back * checker_length:
         length_max = round(lengths[i], 4)
         print(f'包络外径：{length_max}')
@@ -113,7 +109,5 @@ print(f'出刃高度：{round((length_min + length_max) / 2 - length_min, 4)}')
 # print(f'丝径：{round(min_length, 4)}')
 
 
-
-
 end_time = time.time()
-print(f'用时：{round(end_time - start_time,2)}s')
+print(f'用时：{round(end_time - start_time, 2)}s')
