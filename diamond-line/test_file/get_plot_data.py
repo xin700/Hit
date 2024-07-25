@@ -5,6 +5,7 @@
 @Author  ：xin700
 @Date    ：2024/7/15 09:05
 """
+import sys
 
 import cv2
 import numpy as np
@@ -53,9 +54,12 @@ def plot_line_values(start, end):
     plt.xlabel('Distance along the line')
     plt.ylabel('Pixel value')
     plt.show()
+
     height_r = calc_height(values, left_lim)
     height_l = calc_height(values, right_lim)
-    print(f'height_r:{height_r},height_l:{height_l}')
+    height_r = 49 + (height_r - 49) * 0.1
+    height_l = 49 + (height_l - 49) * 0.1
+    print(f'上边界:{round(height_r,3)}\n下边界:{round(height_l,3)}')
 
 
 # Bresenham algorithm to get line_points
@@ -86,41 +90,30 @@ def get_line_points(start, end):
 
 # Check if the height is valid
 def checker4plt(height, values, target):
-    # print(f'height:{height}')
     points = []
     if int(height) == height:
         for i, val in enumerate(values):
             if val == height:
                 points.append(i)
         if len(points) <= 1:
-            # print('1111111111111111111 False')
             return False
         else:
-            # print(f'2222222222222222222 {bool((points[-1] - points[0]) * map4len > target)}')
             return (points[-1] - points[0]) * map4len > target
     else:
         for i, val in enumerate(values):
             if i + 1 != len(values) and (val <= height <= values[i + 1] or val >= height >= values[i + 1]):
                 points.append(i)
         if len(points) <= 1:
-            # print('3333333333333333333 False')
             return False
         else:
             if values[points[0] + 1] - values[points[0]] != 0:
                 left = points[0] + (height - values[points[0]]) / (values[points[0] + 1] - values[points[0]])
             else:
                 left = points[0]
-            # print(f'points[0]:{points[0]},points[-1]:{points[-1]}')
             if values[points[-1] - 1] - values[points[-1]] != 0:
                 right = points[-1] + (height - values[points[-1]]) / (values[points[-1] - 1] - values[points[-1]])
             else:
                 right = points[-1]
-            # print(f'values[points[0]]:{values[points[0]]},values[points[0] + 1]:{values[points[0] + 1]}')
-            # print(f'values[points[-1]]:{values[points[-1]]},values[points[-1] - 1]:{values[points[-1] - 1]}')
-            # print(f'points[0]:{points[0]},points[-1]:{points[-1]}')
-            # print(f'len(values){len(values)} len(points){len(points)}')
-            # print(f'left:{left},right:{right},right-left:{right - left}')
-            # print(f'4444444444444444444{bool((right - left) * map4len > target)}')
             return (right - left) * map4len > target
 
 
@@ -129,17 +122,24 @@ def calc_height(values, target):
     left, right = 0, 255
     eps = 1e-6
     while right - left > eps:
-        # print(f'left:{left},right:{right}')
         mid = (left + right) / 2
         if checker4plt(mid, values, target):
             left = mid
         else:
             right = mid
-        # print(f'\n\n')
     return (left + right) / 2
 
 
-img = cv2.imread('/Users/xin/Desktop/HIT/240719/线1/20240719180419654.bmp', cv2.IMREAD_GRAYSCALE)
+img_path = '/Users/xin/Desktop/HIT/240719/线1/20240719180419654.bmp'
+
+if len(sys.argv) > 1:
+    img_path = sys.argv[1]
+
+if len(sys.argv) > 2:
+    left_lim = float(sys.argv[2]) - 0.1
+    right_lim = float(sys.argv[2]) + 0.1
+
+img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
 
 if img is None:
     exit()

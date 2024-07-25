@@ -47,6 +47,9 @@ img_path = '/Users/xin/Desktop/HIT/240719/线1/20240719180030150.bmp'
 if len(sys.argv) > 1:
     img_path = sys.argv[1]
 
+if len(sys.argv) > 2:
+    border = float(sys.argv[2])
+
 img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
 
 if img is None:
