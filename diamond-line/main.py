@@ -42,7 +42,7 @@ def scan(image, x):
     return ret
 
 
-img_path = '/Users/xin/Desktop/HIT/240719/线1/20240719180030150.bmp'
+img_path = '/Users/xin/Desktop/HIT/240719/线4/20240719184015984.bmp'
 
 if len(sys.argv) > 1:
     img_path = sys.argv[1]
